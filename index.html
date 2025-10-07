@@ -3,45 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- <link rel="stylesheet" href="styles.css"> -->
-<title>Official Application Form</title>
-
-
-</head>
-<body>
-    <style>
-         body {
-        font-family: "Segoe UI", sans-serif;
-        background-color: rgb(237, 240, 250);
+<title>Application Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #042556;
         margin: 0;
         padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
     }
 
     .container {
         max-width: 600px;
-        margin: 60px auto;
-        background:#ffffff;
+        width: 90%;
+        background: white;
         padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0, 0, 60, 0.2);
-        border-top: 10px solid #001f3f;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     h1 {
         text-align: center;
-        color: #001f3f;
+        color: #042556;
         margin-bottom: 30px;
     }
 
-    form {
-        display: flex;
-        flex-direction: column;
-    }
+    form { display: flex; flex-direction: column; }
 
     label {
         font-weight: 600;
         margin-top: 15px;
-        color: #001f3f;
+        color: #042556;
     }
 
     input, textarea, select {
@@ -55,17 +50,12 @@
     }
 
     input:focus, textarea:focus, select:focus {
-        border-color: #001f3f;
-    }
-
-    input[type="file"] {
-        padding: 6px;
-        background-color: #f9f9f9;
+        border-color: #042556;
     }
 
     button {
         margin-top: 25px;
-        background-color: #001f3f;
+        background-color: #042556;
         color: white;
         font-size: 16px;
         font-weight: 600;
@@ -77,7 +67,7 @@
     }
 
     button:hover {
-        background-color: #003366;
+        background-color: #001f3f;
     }
 
     #response {
@@ -85,23 +75,27 @@
         margin-top: 15px;
         font-weight: 600;
     }
-    </style>
+
+    #otherDomain { display: none; margin-top: 8px; }
+</style>
+</head>
+<body>
 
 <div class="container">
     <h1>Job Application Form</h1>
 
     <form id="officialForm">
         <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        <input type="text" id="name" name="name" required>
 
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <input type="email" id="email" name="email" required>
 
         <label for="address">Address</label>
-        <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+        <textarea id="address" name="address" rows="3" required></textarea>
 
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number"  pattern="{10}$"required>
+        <input type="tel" id="phone" name="phone" pattern="\d{10}" title="Enter 10 digits" required>
 
         <label for="domain">Domain</label>
         <select id="domain" name="domain" required>
@@ -115,26 +109,28 @@
             <option value="Other">Other</option>
         </select>
 
-       <input type="text" id="otherDomain" name="otherDomain" placeholder="Enter your domain" style="display:none; margin-top:8px;">
+        <input type="text" id="otherDomain" name="otherDomain" placeholder="Enter your domain">
 
         <label for="qualification">Educational Qualification</label>
-        <input type="text" id="qualification" name="qualification" placeholder="e.g. B.Tech in Computer Science" required>
+        <input type="text" id="qualification" name="qualification" required>
 
         <label for="location">Preferred Location</label>
-        <input type="text" id="location" name="location" placeholder="Enter preferred location" required>
+        <input type="text" id="location" name="location" required>
 
-        <label for="resume">Upload Resume (Drive link)</label>
-        <input type="url" id="resume" name="resume" accept="link" required>
+        <label for="resume">Resume Link (Google Drive URL)</label>
+        <input type="url" id="resume" name="resume" placeholder="Enter Drive link" required>
 
         <button type="submit">Submit Application</button>
         <p id="response"></p>
     </form>
 </div>
 
-<script >
-    const domainSelect = document.getElementById("domain");
+<script>
+const form = document.getElementById("officialForm");
+const domainSelect = document.getElementById("domain");
 const otherDomainInput = document.getElementById("otherDomain");
 
+// Show/hide "Other domain" field
 domainSelect.addEventListener("change", function() {
     if (this.value === "Other") {
         otherDomainInput.style.display = "block";
@@ -145,44 +141,36 @@ domainSelect.addEventListener("change", function() {
     }
 });
 
-
-let domainValue = domainSelect.value === "Other" ? otherDomainInput.value : domainSelect.value;
-
-document.getElementById("officialForm").addEventListener("submit", function(e){
+// Handle form submission using Apps Script
+form.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const response = document.getElementById("response");
-    response.style.color = "#001f3f";
-    response.innerText = "Submitting...";
+    // Determine domain value
+    const domainValue = domainSelect.value === "Other" ? otherDomainInput.value : domainSelect.value;
 
-   
-    setTimeout(() => {
-        response.style.color = "green";
-        response.innerText = "Form submitted successfully!";
-        document.getElementById("officialForm").reset();
-    }, 1000);
+    const data = {
+        name: form.name.value,
+        email: form.email.value,
+        address: form.address.value,
+        phone: form.phone.value,
+        domain: domainValue,
+        qualification: form.qualification.value,
+        location: form.location.value,
+        resume: form.resume.value
+    };
+
+    const responseEl = document.getElementById("response");
+    responseEl.style.color = "#042556";
+    responseEl.innerText = "Submitting...";
+
+    google.script.run.withSuccessHandler(msg => {
+        responseEl.style.color = "green";
+        responseEl.innerText = msg;
+        form.reset();
+        otherDomainInput.style.display = "none";
+    }).submitForm(data);
 });
-
-const form = document.getElementById("officialForm");
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    
-    fetch("https://script.google.com/macros/s/AKfycbxe8AkiOBWmDPUzfJEH_Zlw7MeiHkNTdHZXq6Iogcc6BV5SkhK2I8V7NhYiwjVqbJhP/exec", {
-      method: "POST",
-      body: new FormData(form)
-    })
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById("response").innerText = "✅ Application submitted successfully!";
-      form.reset();
-    })
-    .catch(err => {
-      document.getElementById("response").innerText = "❌ Error submitting form!";
-      console.error(err);
-    });
-  });
 </script>
-
 
 </body>
 </html>
