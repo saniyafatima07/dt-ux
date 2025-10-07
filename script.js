@@ -1,3 +1,19 @@
+const domainSelect = document.getElementById("domain");
+const otherDomainInput = document.getElementById("otherDomain");
+
+domainSelect.addEventListener("change", function() {
+    if (this.value === "Other") {
+        otherDomainInput.style.display = "block";
+        otherDomainInput.required = true;
+    } else {
+        otherDomainInput.style.display = "none";
+        otherDomainInput.required = false;
+    }
+});
+
+
+let domainValue = domainSelect.value === "Other" ? otherDomainInput.value : domainSelect.value;
+
 document.getElementById("officialForm").addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -5,7 +21,7 @@ document.getElementById("officialForm").addEventListener("submit", function(e){
     response.style.color = "#001f3f";
     response.innerText = "Submitting...";
 
-    // Dummy JS handler (you can replace with Google Sheets integration)
+   
     setTimeout(() => {
         response.style.color = "green";
         response.innerText = "Form submitted successfully!";

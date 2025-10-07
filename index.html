@@ -38,14 +38,16 @@
             <option value="Other">Other</option>
         </select>
 
+       <input type="text" id="otherDomain" name="otherDomain" placeholder="Enter your domain" style="display:none; margin-top:8px;">
+
         <label for="qualification">Educational Qualification</label>
         <input type="text" id="qualification" name="qualification" placeholder="e.g. B.Tech in Computer Science" required>
 
         <label for="location">Preferred Location</label>
         <input type="text" id="location" name="location" placeholder="Enter preferred location" required>
 
-        <label for="resume">Upload Resume (PDF only)</label>
-        <input type="file" id="resume" name="resume" accept=".pdf" required>
+        <label for="resume">Upload Resume (Drive link)</label>
+        <input type="link" id="resume" name="resume" accept="link" required>
 
         <button type="submit">Submit Application</button>
         <p id="response"></p>
