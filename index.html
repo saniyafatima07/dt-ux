@@ -3,85 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
 <title>Official Application Form</title>
 
-<style>
-    body {
-        font-family: "Segoe UI", sans-serif;
-        background-color: #f4f6fb;
-        margin: 0;
-        padding: 0;
-    }
 
-    .container {
-        max-width: 600px;
-        margin: 60px auto;
-        background: white;
-        padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0, 0, 60, 0.2);
-        border-top: 10px solid #001f3f;
-    }
-
-    h1 {
-        text-align: center;
-        color: #001f3f;
-        margin-bottom: 30px;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-    }
-
-    label {
-        font-weight: 600;
-        margin-top: 15px;
-        color: #001f3f;
-    }
-
-    input, textarea, select {
-        padding: 10px 12px;
-        margin-top: 6px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 15px;
-        outline: none;
-        transition: border-color 0.3s;
-    }
-
-    input:focus, textarea:focus, select:focus {
-        border-color: #001f3f;
-    }
-
-    input[type="file"] {
-        padding: 6px;
-        background-color: #f9f9f9;
-    }
-
-    button {
-        margin-top: 25px;
-        background-color: #001f3f;
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        padding: 12px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #003366;
-    }
-
-    #response {
-        text-align: center;
-        margin-top: 15px;
-        font-weight: 600;
-    }
-</style>
 </head>
 <body>
 
@@ -127,22 +52,8 @@
     </form>
 </div>
 
-<script>
-document.getElementById("officialForm").addEventListener("submit", function(e){
-    e.preventDefault();
+<script src="script.js"></script>
 
-    const response = document.getElementById("response");
-    response.style.color = "#001f3f";
-    response.innerText = "Submitting...";
-
-    // Dummy JS handler (you can replace with Google Sheets integration)
-    setTimeout(() => {
-        response.style.color = "green";
-        response.innerText = "Form submitted successfully!";
-        document.getElementById("officialForm").reset();
-    }, 1000);
-});
-</script>
 
 </body>
 </html>
