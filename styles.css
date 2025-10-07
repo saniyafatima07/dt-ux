@@ -1,6 +1,6 @@
  body {
         font-family: "Segoe UI", sans-serif;
-        background-color: #f4f6fb;
+        background-color: rgb(237, 240, 250);
         margin: 0;
         padding: 0;
     }
@@ -8,7 +8,7 @@
     .container {
         max-width: 600px;
         margin: 60px auto;
-        background: white;
+        background:#ffffff;
         padding: 40px;
         border-radius: 15px;
         box-shadow: 0 4px 20px rgba(0, 0, 60, 0.2);

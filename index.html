@@ -11,7 +11,7 @@
 <body>
 
 <div class="container">
-    <h1>Official Application Form</h1>
+    <h1>Job Application Form</h1>
 
     <form id="officialForm">
         <label for="name">Full Name</label>
@@ -24,7 +24,7 @@
         <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
 
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number"  pattern="{10}$"required>
 
         <label for="domain">Domain</label>
         <select id="domain" name="domain" required>
@@ -47,7 +47,7 @@
         <input type="text" id="location" name="location" placeholder="Enter preferred location" required>
 
         <label for="resume">Upload Resume (Drive link)</label>
-        <input type="link" id="resume" name="resume" accept="link" required>
+        <input type="url" id="resume" name="resume" accept="link" required>
 
         <button type="submit">Submit Application</button>
         <p id="response"></p>
