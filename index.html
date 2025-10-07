@@ -3,12 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="styles.css">
+<!-- <link rel="stylesheet" href="styles.css"> -->
 <title>Official Application Form</title>
 
 
 </head>
 <body>
+    <style>
+         body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: rgb(237, 240, 250);
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 60px auto;
+        background:#ffffff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 60, 0.2);
+        border-top: 10px solid #001f3f;
+    }
+
+    h1 {
+        text-align: center;
+        color: #001f3f;
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: 600;
+        margin-top: 15px;
+        color: #001f3f;
+    }
+
+    input, textarea, select {
+        padding: 10px 12px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #001f3f;
+    }
+
+    input[type="file"] {
+        padding: 6px;
+        background-color: #f9f9f9;
+    }
+
+    button {
+        margin-top: 25px;
+        background-color: #001f3f;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #003366;
+    }
+
+    #response {
+        text-align: center;
+        margin-top: 15px;
+        font-weight: 600;
+    }
+    </style>
 
 <div class="container">
     <h1>Job Application Form</h1>
@@ -54,7 +131,57 @@
     </form>
 </div>
 
-<script src="script.js"></script>
+<script >
+    const domainSelect = document.getElementById("domain");
+const otherDomainInput = document.getElementById("otherDomain");
+
+domainSelect.addEventListener("change", function() {
+    if (this.value === "Other") {
+        otherDomainInput.style.display = "block";
+        otherDomainInput.required = true;
+    } else {
+        otherDomainInput.style.display = "none";
+        otherDomainInput.required = false;
+    }
+});
+
+
+let domainValue = domainSelect.value === "Other" ? otherDomainInput.value : domainSelect.value;
+
+document.getElementById("officialForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const response = document.getElementById("response");
+    response.style.color = "#001f3f";
+    response.innerText = "Submitting...";
+
+   
+    setTimeout(() => {
+        response.style.color = "green";
+        response.innerText = "Form submitted successfully!";
+        document.getElementById("officialForm").reset();
+    }, 1000);
+});
+
+const form = document.getElementById("officialForm");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    
+    fetch("https://script.google.com/macros/s/AKfycbxe8AkiOBWmDPUzfJEH_Zlw7MeiHkNTdHZXq6Iogcc6BV5SkhK2I8V7NhYiwjVqbJhP/exec", {
+      method: "POST",
+      body: new FormData(form)
+    })
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("response").innerText = "✅ Application submitted successfully!";
+      form.reset();
+    })
+    .catch(err => {
+      document.getElementById("response").innerText = "❌ Error submitting form!";
+      console.error(err);
+    });
+  });
+</script>
 
 
 </body>

@@ -32,7 +32,7 @@ document.getElementById("officialForm").addEventListener("submit", function(e){
 const form = document.getElementById("officialForm");
   form.addEventListener("submit", e => {
     e.preventDefault();
-
+    
     fetch("https://script.google.com/macros/s/AKfycbxe8AkiOBWmDPUzfJEH_Zlw7MeiHkNTdHZXq6Iogcc6BV5SkhK2I8V7NhYiwjVqbJhP/exec", {
       method: "POST",
       body: new FormData(form)
